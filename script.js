@@ -1,4 +1,4 @@
-var answer = prompt("tell me your name")
+// var answer = prompt("tell me your name")
 
 
 var board = {
@@ -7,52 +7,78 @@ var board = {
   bottom:{ col1:".", col2:".", col3:"." }
 };
 
-for (var rowKey in board) {
-  console.log(board[rowKey]);
+// for (var rowKey in board) {
+//   console.log(board[rowKey]);
+// }
+
+function printBoard() {
+  var boardOutput = "";
+  for( var rowKey in board ){
+    var row = board[rowKey];
+    for( var columnKey in row ){
+      boardOutput = boardOutput + row[columnKey];
+    }
+  
+    boardOutput = boardOutput + "\n";
+  }
+
+  console.log( boardOutput );
 }
 
-var boardOutput = "";
+function checkWin(row, col, player) {
 
-// var boardOutput = "";
+  // check if row or col tile is in is full
+  if ((board[row]["col1"] == player && board[row]["col2"] == player && board[row]["col3"] == player)
+    || (board["top"][col]===board["middle"][col] && board["middle"][col]===board["bottom"][col])) {
 
-// // loop through each row
-// for( var rowKey in board ){
+    return true;
+  }
+  // check if diagonals are full
+  if ((board["top"]["col1"] == player && board["middle"]["col2"] == player && board["bottom"]["col3"] == player) || (board["top"]["col3"] == player && board["middle"]["col2"] == player && board["bottom"]["col1"] == player)) {
+    return true;
+  }  
+}; 
 
-//   /*
-//    * make a variable for convenience
-//    * a shortcut so you won't have
-//    * to write board[rowKey][columnKey]
-//    */
-//   var row = board[rowKey];
 
-//   // loop through each column
-//   for( var columnKey in row ){
+// set a variable that represents
+// whether or not the game is currently running
+var running = true;
 
-//     // concatenate the string together
-//     boardOutput = boardOutput + row[columnKey];
-//   }
+// run the game on a loop
+var round = 1;
+while( running ){ // while the game is still going on
 
-//   // make a newline so that each row begins on a new line
-//   boardOutput = boardOutput + "\n";
-// }
+  var row = prompt("enter your row: top, middle or bottom");
+  var col = prompt("enter your column: col1, col2, col3");
 
-// console.log( boardOutput );
+  // player 1's turn
+  if (round%2===1) {
+    board[row][col] = 'X'; // place tile and update board
+    printBoard();
+    if (checkWin(row, col, "X")===true) {
+      console.log("Player 1 wins! Game over.");
+      break;
+    }
+  }
 
-// // set a variable that represents
-// // whether or not the game is currently running
-// var running = true;
+  // player 2's turn
+  else if (round%2===0) {
+    board[row][col] = "O"; // place tile and update board
+    printBoard();
+    if (checkWin(row, col, "O")===true) {
+      console.log("Player 2 wins! Game over.");
+      break;
+    }
+  }
 
-// // run the game on a loop
-// while( running ){
-//   var row = prompt("enter your row: top, middle or bottom");
-//   var column = prompt("enter your column: col1, col2, col3");
 
-//   console.log("current value @: ", board[row][column] );
+  // if all spaces are filled, end game
+  if (round==10) {
+    console.log("It's a tie! Game over.");
+    break;
+  }
 
-//   // you can also use the break statement to get out of a while loop
-//   break;
 
-//   // if all spaces are filled, end game
-
-//   // if game is won, end game
-// }
+  round +=1;
+  // if game is won, end game
+}
