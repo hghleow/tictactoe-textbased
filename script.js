@@ -1,61 +1,58 @@
+var answer = prompt("tell me your name")
+
+
 var board = {
-  top:{
-    col1:".",
-    col2:".",
-    col3:"."
-  },
-  middle:{
-    row1:".",
-    row2:".",
-    row3:"."
-  },
-  bottom:{
-    row1:".",
-    row2:".",
-    row3:"."
-  }
+  top:{ col1:".", col2:".", col3:"." },
+  middle:{ col1:".", col2:".", col3:"." },
+  bottom:{ col1:".", col2:".", col3:"." }
 };
+
+for (var rowKey in board) {
+  console.log(board[rowKey]);
+}
 
 var boardOutput = "";
 
-// loop through each row
-for( var rowKey in board ){
+// var boardOutput = "";
 
-  /*
-   * make a variable for convenience
-   * a shortcut so you won't have
-   * to write board[rowKey][columnKey]
-   */
-  var row = board[rowKey];
+// // loop through each row
+// for( var rowKey in board ){
 
-  // loop through each column
-  for( var columnKey in row ){
+//   /*
+//    * make a variable for convenience
+//    * a shortcut so you won't have
+//    * to write board[rowKey][columnKey]
+//    */
+//   var row = board[rowKey];
 
-    // concatenate the string together
-    boardOutput = boardOutput + row[columnKey];
-  }
+//   // loop through each column
+//   for( var columnKey in row ){
 
-  // make a newline so that each row begins on a new line
-  boardOutput = boardOutput + "\n";
-}
+//     // concatenate the string together
+//     boardOutput = boardOutput + row[columnKey];
+//   }
 
-console.log( boardOutput );
+//   // make a newline so that each row begins on a new line
+//   boardOutput = boardOutput + "\n";
+// }
 
-// set a variable that represents
-// whether or not the game is currently running
-var running = true;
+// console.log( boardOutput );
 
-// run the game on a loop
-while( running ){
-  var row = prompt("enter your row: top, middle or bottom");
-  var column = prompt("enter your column: col1, col2, col3");
+// // set a variable that represents
+// // whether or not the game is currently running
+// var running = true;
 
-  console.log("current value @: ", board[row][column] );
+// // run the game on a loop
+// while( running ){
+//   var row = prompt("enter your row: top, middle or bottom");
+//   var column = prompt("enter your column: col1, col2, col3");
 
-  // you can also use the break statement to get out of a while loop
-  break;
+//   console.log("current value @: ", board[row][column] );
 
-  // if all spaces are filled, end game
+//   // you can also use the break statement to get out of a while loop
+//   break;
 
-  // if game is won, end game
-}
+//   // if all spaces are filled, end game
+
+//   // if game is won, end game
+// }
